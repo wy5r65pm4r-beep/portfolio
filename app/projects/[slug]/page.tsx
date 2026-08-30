@@ -4,6 +4,8 @@ import { ArrowLeft, ArrowRight, ArrowUp } from 'lucide-react';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { getProject, portfolioProjects } from '@/lib/project-data';
 
+const siteBase = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
+
 export function generateStaticParams() { return portfolioProjects.map(({ slug }) => ({ slug })); }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
@@ -22,7 +24,7 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
   const next = portfolioProjects[(currentIndex + 1) % portfolioProjects.length];
   return <main className="detail-page" id="top">
     <ThemeToggle />
-    <header className="detail-header"><a href="/" className="brand">ZOEY <span>Visual Designer</span></a><a href="/#works" className="detail-back"><ArrowLeft size={15} /> All projects</a><span>{project.no} / 05</span></header>
+    <header className="detail-header"><a href={`${siteBase}/`} className="brand">ZOEY <span>Visual Designer</span></a><a href={`${siteBase}/#works`} className="detail-back"><ArrowLeft size={15} /> All projects</a><span>{project.no} / 05</span></header>
     <section className="detail-hero"><div className="detail-eyebrow"><span>{project.category}</span><span>{project.year}</span></div><h1>{project.en}<br /><em data-cms-key={`project.${project.slug}.title`}>{project.title}</em></h1><p data-cms-key={`project.${project.slug}.headline`}>{project.headline}</p></section>
     <DetailSlot label={`${project.title} · 项目主视觉`} index={0} shape="wide" accent={project.accent} cmsKey={`project.${project.slug}.media.0`} />
     <section className="detail-overview"><div><span>Overview</span><p data-cms-key={`project.${project.slug}.intro`}>{project.intro}</p></div><div><span>Challenge</span><p data-cms-key={`project.${project.slug}.challenge`}>{project.challenge}</p></div><div><span>Strategy</span><p data-cms-key={`project.${project.slug}.strategy`}>{project.strategy}</p></div><div><span>Role</span><p data-cms-key={`project.${project.slug}.role`}>{project.role}</p></div></section>
@@ -39,7 +41,7 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
       <div className="detail-chapter"><span>04</span><h2>In Application</h2><p>最终落地、应用场景与项目成果</p></div>
       {project.gallery.slice(12).map((label,i) => <DetailSlot key={label} label={label} index={i+12} shape="wide" accent={project.accent} cmsKey={`project.${project.slug}.media.${i+12}`} />)}
     </section>
-    <section className="detail-next"><span>Next project</span><a href={`/projects/${next.slug}`}><small>{next.no} / {next.category}</small>{next.title}<ArrowRight size={34} /></a></section>
+    <section className="detail-next"><span>Next project</span><a href={`${siteBase}/projects/${next.slug}/`}><small>{next.no} / {next.category}</small>{next.title}<ArrowRight size={34} /></a></section>
     <footer className="detail-footer"><span>© 2026 Zoey Portfolio</span><a href="#top">Back to top <ArrowUp size={14} /></a></footer>
   </main>;
 }
