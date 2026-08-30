@@ -36,6 +36,7 @@ jobs:
           NEXT_PUBLIC_BASE_PATH: /portfolio
       - name: Prepare GitHub Pages artifact
         run: |
+          rm -f dist/client/admin.html dist/client/admin.rsc
           mv dist/client/portfolio/_next dist/client/_next
           rmdir dist/client/portfolio
           for page in dist/client/projects/*.html; do
