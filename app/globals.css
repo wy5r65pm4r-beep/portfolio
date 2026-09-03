@@ -17,7 +17,11 @@
 .cms-media{display:block;max-width:100%;object-position:center center}
 video.cms-media{border:0}
 @media(max-width:800px){
+  .project-browser.grid{grid-template-columns:minmax(0,1fr)}
+  .project-browser,.project-card{min-width:0;width:100%;max-width:100%}
   .media-slot,.detail-slot,.project-media{min-width:0;max-width:100%}
+  .project-info{min-width:0;max-width:100%;overflow:hidden}
+  .project-info h3,.project-info p{overflow-wrap:anywhere}
   .cms-media{object-fit:contain;background:var(--paper)}
   .dark-slot .cms-media,.ink .cms-media{background:#171716}
   .detail-slot:hover .cms-media{transform:none}
