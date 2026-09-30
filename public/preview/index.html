@@ -21,8 +21,36 @@
 
 
 *{box-sizing:border-box}body{margin:0}a{color:inherit;text-decoration:none}button{font:inherit}html{scroll-behavior:smooth}.gallery-header nav button.selected::after{transform:scaleX(1)}.gallery-home{padding-top:8vw}.gallery-heading{margin-top:2.1vw}.gallery-dialog{max-height:80vh}.gallery-placeholder.reveal-pending,.reveal-pending{opacity:0;transform:translateY(36px) scaleY(.92);transform-origin:bottom;clip-path:inset(0);transition:opacity .8s ease,transform .9s cubic-bezier(.2,.7,.2,1),clip-path .9s cubic-bezier(.2,.7,.2,1)}.gallery-placeholder.reveal-visible,.reveal-visible{opacity:1;transform:none;clip-path:inset(0)}.preview-detail{padding-top:60px}.preview-detail h1{font:400 clamp(38px,7vw,100px)/1.03 'Times New Roman',serif;max-width:1000px;margin:50px 0 20px}.preview-detail h2{font-size:22px;font-weight:400}.eyebrow{margin-top:40px;color:#999;font-size:12px}.detail-copy{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin:60px 0}.detail-copy h3{font-weight:400}.detail-copy p{color:#999;line-height:1.8}.preview-detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}.preview-detail-image{background:#f2f2f0;color:#555;aspect-ratio:4/3;position:relative;display:grid;place-items:center}.preview-detail-image:nth-child(5n+1){grid-column:1/-1;aspect-ratio:16/9}.preview-detail-image>span{position:absolute;left:16px;top:16px;font-size:12px}.preview-detail-image>div{text-align:center}.preview-detail-image small{display:block;margin-top:12px;font-size:12px}.next-project{display:block;margin-top:100px;font:400 clamp(24px,4vw,50px)/1.4 'Times New Roman',serif}.back{font-size:12px}@media(max-width:600px){.gallery-home{padding-top:76px}.gallery-heading{margin-top:20px}.gallery-header{padding-top:22px}.preview-detail{padding-top:25px}.detail-copy{grid-template-columns:1fr;gap:10px}.preview-detail-grid{grid-template-columns:1fr;gap:20px}.preview-detail-image:nth-child(5n+1){grid-column:auto;aspect-ratio:4/3}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal-pending,.gallery-placeholder.reveal-pending{opacity:1;clip-path:none;transform:none;transition:none}}
-</style></head><body><main id="app"></main><script>
-const projects = [
+</style><style>/* Revised artboard: 1920 x 1080 viewport, fluid horizontal positions. */
+.gallery-home{padding:0 1.6vw 24vw;overflow:clip}
+.gallery-header{padding:0;left:1.6vw;right:1.6vw;top:3.5vh;background:transparent;font-size:clamp(10px,.78vw,16px);mix-blend-mode:difference;color:#fff;pointer-events:none}
+.gallery-header a,.gallery-header button{pointer-events:auto}
+.gallery-header nav{position:relative;width:33%;height:20px;display:block}
+.gallery-header nav button{position:absolute;top:0;font-size:inherit}
+.gallery-header nav button:nth-child(1){left:0}.gallery-header nav button:nth-child(2){left:27%}.gallery-header nav button:nth-child(3){right:0}
+.gallery-heading{margin:10.5vw 0 11.7vw}
+.gallery-heading h1{font-size:19.2vw;line-height:.74;letter-spacing:-.071em}
+.gallery-heading>span{font-size:1.1vw;margin:0 .9vw 0 0;line-height:1}
+.gallery-grid{display:grid;grid-template-columns:repeat(100,minmax(0,1fr));column-gap:0;row-gap:8.9vw}
+.gallery-images{height:24.5vw;gap:1vw}
+.gallery-work h2{font-size:clamp(9px,.78vw,16px);letter-spacing:-.025em;margin:1.1vw 0 0;line-height:1.3}
+.position-0{grid-area:1/1/2/42}.position-1{grid-area:1/58/2/101}
+.position-2{grid-area:2/18/3/59}.position-3{grid-area:3/43/4/101}
+.position-4{grid-area:4/1/5/59}.position-5{grid-area:5/1/6/44}
+.position-6{grid-area:6/35/7/76}.position-7{grid-area:7/9/8/42}
+.position-8{grid-area:7/60/8/101}.position-9{grid-area:8/26/9/76}
+.position-10{grid-area:9/1/10/44}.position-11{grid-area:9/52/10/101}
+.fixed-footer{position:fixed;left:0;right:0;bottom:2.8vh;z-index:40;background:transparent;color:#fff;mix-blend-mode:difference;font-size:clamp(10px,.78vw,16px);pointer-events:none}
+.fixed-footer>span{position:absolute;left:26.1%;bottom:0}.fixed-footer>button{position:absolute;left:73.5%;bottom:0;background:none;border:0;color:inherit;font:inherit;cursor:pointer;padding:0;pointer-events:auto}
+.gallery-theme{bottom:2.2vh;right:1.6vw;background:transparent;mix-blend-mode:difference;color:#fff;border-color:#777}
+.reveal-shell{min-width:0;height:100%;overflow:hidden;position:relative}
+.reveal-shell>.gallery-placeholder{width:100%;height:100%}
+.reveal-shell .reveal-pending,.gallery-placeholder.reveal-pending{opacity:0;transform:translateY(100%);clip-path:inset(0);transition:transform 1.35s cubic-bezier(.16,1,.3,1),opacity .65s ease;transition-delay:var(--reveal-delay,0ms)}
+.reveal-shell .reveal-visible,.gallery-placeholder.reveal-visible{opacity:1;transform:translateY(0);clip-path:inset(0)}
+.preview-detail{padding-top:120px}.preview-detail-grid>.reveal-shell{aspect-ratio:4/3}.preview-detail-grid>.reveal-shell:nth-child(5n+1){grid-column:1/-1;aspect-ratio:16/9}.preview-detail-image{height:100%;width:100%;aspect-ratio:auto}
+@media(max-width:600px){.gallery-header{top:20px;font-size:10px}.gallery-header nav{width:44%}.gallery-header nav button:nth-child(2){left:40%}.gallery-heading{margin-top:100px}.gallery-heading>span{font-size:10px}.gallery-grid{row-gap:11vw}.gallery-work h2{font-size:9px}.fixed-footer{font-size:9px;bottom:18px}.fixed-footer>span{left:5%}.fixed-footer>button{left:70%}.gallery-theme{bottom:12px}.preview-detail-grid>.reveal-shell:nth-child(5n+1){grid-column:auto;aspect-ratio:4/3}}
+@media(prefers-reduced-motion:reduce){.reveal-shell .reveal-pending,.gallery-placeholder.reveal-pending{opacity:1;transform:none;transition:none}}
+</style></head><body><main id="app"></main><script>const projects = [
  ['supor-festival','SUPOR Festival Visual Campaign','苏泊尔节日海报','海报图',[1,1]],
  ['supor-campaign-02','SUPOR Campaign 02','苏泊尔项目 02','海报图',[1,1,1]],
  ['manlong-tent-01','MANLONG Tent Illustration 01','曼龙帐篷插画 01','插画图',[1,1]],
@@ -36,6 +64,8 @@ const projects = [
  ['digital-project-02','Digital Experience 02','网站设计项目 02','网站界面图',[1,1]],
  ['animation-project-03','Animation Art 03','动画美术项目 03','动画关键帧或视频',[1,1]],
 ];
+const ratios=[[1.5,1],[1,1.33],[1.5,1],[1,1.5,1],[1,1.5,1],[1,1.33],[1.5,1],[1,1],[1.5,1],[1,1],[1,1.33],[1,1]];
+projects.forEach((project,i)=>project[4]=ratios[i]);
 const app=document.querySelector('#app');
 const current=projects.find(p=>p[0]===new URLSearchParams(location.search).get('project'));
 let light=false;
@@ -46,13 +76,13 @@ app.innerHTML=`<header class="gallery-header"><a href="./">ZOEY <span>Visual Des
 ${current?`<article class="preview-detail"><a class="back" href="./#works">← ALL PROJECTS</a><p class="eyebrow">PROJECT ${String(projects.indexOf(current)+1).padStart(2,'0')} / 12 · 预览</p><h1>${current[1]}</h1><h2>${current[2]}</h2><p>项目介绍、年份与职责待补充</p><div class="detail-copy"><section><h3>背景</h3><p>待补充此项目的背景与目标。</p></section><section><h3>设计思路</h3><p>待补充概念与设计过程。</p></section><section><h3>职责</h3><p>待确认本人职责与合作信息。</p></section></div><div class="preview-detail-grid">${Array.from({length:14},(_,i)=>`<div class="preview-detail-image reveal" role="img" aria-label="${current[3]} ${i+1} 待上传"><span>${String(i+1).padStart(2,'0')}</span><div>${current[3]}<small>待上传项目展示素材</small></div></div>`).join('')}</div><a class="next-project" href="${href(projects[(projects.indexOf(current)+1)%12])}">NEXT PROJECT ↗<br>${projects[(projects.indexOf(current)+1)%12][1]}</a></article>`:
 `<section class="gallery-heading"><h1>PORTFOLIO</h1><span>2026</span></section><section class="gallery-grid" id="works" aria-label="精选作品">${projects.map((p,i)=>`<a class="gallery-work position-${i}" href="${href(p)}" aria-label="查看 ${p[1]}"><div class="gallery-images" style="grid-template-columns:${p[4].map(s=>s+'fr').join(' ')}">${p[4].map((_,j)=>`<div class="gallery-placeholder reveal" role="img" aria-label="${p[3]} ${j+1} 待上传"></div>`).join('')}</div><h2>${p[1]}</h2></a>`).join('')}</section>`}
 <button class="gallery-theme" aria-label="切换为白色背景" aria-pressed="false">◑</button><dialog class="gallery-dialog" aria-labelledby="panel-title"><button class="gallery-close" aria-label="关闭">CLOSE ×</button><h2 id="panel-title"></h2><div id="panel-body"></div></dialog>`;
-document.title=current?current[2]+' — 独立预览':'Zoey Portfolio — 独立交互预览';
+app.insertAdjacentHTML('beforeend','<footer class="fixed-footer"><span>LOCATION / 待确认</span><button data-panel="contact">CONTACT</button></footer>');
+document.title=current?current[2]+' — 独立预览':'Zoey Portfolio — 新版框架预览';
 function theme(){app.classList.toggle('gallery-light',light);document.documentElement.style.background=light?'#fff':'#050505';const b=document.querySelector('.gallery-theme');b.textContent=light?'◐':'◑';b.setAttribute('aria-pressed',String(light));b.setAttribute('aria-label',light?'切换为黑色背景':'切换为白色背景');}
 theme();document.querySelector('.gallery-theme').onclick=()=>{light=!light;theme();try{localStorage.setItem('portfolio-preview-theme',light?'light':'dark');}catch{}};
 const dialog=document.querySelector('dialog');let trigger;
 function close(){dialog.close();document.body.style.overflow='';document.querySelectorAll('[data-panel]').forEach(b=>b.classList.remove('selected'));trigger?.focus();}
 function open(panel,button){trigger=button;document.querySelectorAll('[data-panel]').forEach(b=>b.classList.toggle('selected',b===button));document.querySelector('#panel-title').textContent=panel.toUpperCase();document.querySelector('#panel-body').innerHTML=panel==='about'?'<div class="gallery-about"><p>审美成熟，但不止于好看。</p><p>专注于消费品牌与视觉叙事的平面设计师。从复杂需求中找到清晰秩序，把概念推进到最终交付。</p><p>品牌视觉 / 包装 / 插画 / 动画美术 / 数字设计</p></div>':`<nav aria-label="项目索引">${panel==='menu'?'<a href="./#works">Selected Works ↗</a>':''}${projects.map((p,i)=>`<a href="${href(p)}"><small>${String(i+1).padStart(2,'0')}</small>${p[1]} ↗</a>`).join('')}</nav>`;dialog.showModal();document.body.style.overflow='hidden';}
-document.querySelectorAll('[data-panel]').forEach(b=>b.onclick=()=>open(b.dataset.panel,b));document.querySelector('.gallery-close').onclick=close;dialog.addEventListener('cancel',e=>{e.preventDefault();close();});dialog.addEventListener('click',e=>{if(e.target===dialog)close();});
-if(!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window){const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('reveal-visible');observer.unobserve(e.target);}}),{threshold:.08});document.querySelectorAll('.reveal').forEach(el=>{el.classList.add('reveal-pending');observer.observe(el);});}
-
+document.querySelectorAll('[data-panel]').forEach(b=>b.onclick=()=>{open(b.dataset.panel,b);if(b.dataset.panel==='contact')document.querySelector('#panel-body').innerHTML='<div class="gallery-about"><p>期待与你合作。</p><p>联系邮箱 / 社交媒体待补充</p></div>';});document.querySelector('.gallery-close').onclick=close;dialog.addEventListener('cancel',e=>{e.preventDefault();close();});dialog.addEventListener('click',e=>{if(e.target===dialog)close();});
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window){const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.firstElementChild.classList.add('reveal-visible');observer.unobserve(e.target);}}),{threshold:.12});document.querySelectorAll('.reveal').forEach(el=>{const wrapper=document.createElement('div');wrapper.className='reveal-shell';el.before(wrapper);wrapper.append(el);el.style.setProperty('--reveal-delay',`${Array.from(wrapper.parentElement.children).indexOf(wrapper)%3*120}ms`);el.classList.add('reveal-pending');observer.observe(wrapper);});}
 </script></body></html>
