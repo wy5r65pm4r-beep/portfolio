@@ -22,6 +22,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: pnpm/action-setup@v4
         with:
           version: 11.19.0
@@ -44,6 +46,18 @@ jobs:
             mkdir -p "dist/client/projects/$slug"
             mv "$page" "dist/client/projects/$slug/index.html"
           done
+      - name: Publish approved homepage snapshot
+        # Pin the approved preview so future preview edits do not change production.
+        run: |
+          git show ab41a2c9766ac9fde8df241c0078ada4b2ad1be4:public/preview/index.html > dist/client/index.html
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const file = 'dist/client/index.html';
+          let html = fs.readFileSync(file, 'utf8');
+          html = html.replace('<meta name="robots" content="noindex,nofollow">', '');
+          html = html.replaceAll('独立交互预览', 'Visual Designer').replaceAll('独立预览', 'Zoey').replaceAll('新版框架预览', 'Visual Designer').replaceAll(' · 预览', '');
+          fs.writeFileSync(file, html);
+          NODE
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
